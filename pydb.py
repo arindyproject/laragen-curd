@@ -43,21 +43,26 @@ for i in tables:
     print(ref)
     # --------------------------------------------------
 
-    tbl = {"name": i[0], "show": True}
+    tbl = {"name": i[0], "show": True, "auth" : True}
     rows = []
 
     print("+----------------------------------------------------------+")
     for item in table:
         print("| " + str(item))
-
-        rows.append({"row": item[0], "show": True})
-
+        value   = item[0]
+        ref_tab = ""
+        for ref_i in ref:
+            if(i[0] in ref_i[0].split('.')[:1] and item[0] in ref_i[0].split('.')[1:]):
+                value = 1
+                ref_tab = ref_i[1].split('.')
+        rows.append({"row": item[0], "show": True , "value" : value, "ref" : ref_tab})
+        
     tbl["rows"] = rows
     table_json.append(tbl)
     print("+----------------------------------------------------------+\n")
 
 sorted_string = json.dumps(table_json, indent=4, sort_keys=True)
 # print(sorted_string)
-with open('json_file.json', "w") as file_write:
+with open('json_tables.json', "w") as file_write:
     # write json data into file
     json.dump(table_json, file_write)
