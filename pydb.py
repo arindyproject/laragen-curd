@@ -1,3 +1,8 @@
+__author__ = "Aji Ari Adam"
+__copyright__ = "Copyright 2020, ArindyProject or AdamLabs"
+__version__ = "0.0.1"
+
+
 from pathlib import Path  # python3 only
 from dotenv import load_dotenv
 import os
@@ -40,23 +45,25 @@ for i in tables:
     cursor_reff.execute(
         "SELECT CONCAT(table_name, '.', column_name) AS 'foreign key', CONCAT(referenced_table_name, '.', referenced_column_name) AS 'references', constraint_name AS 'constraint name' FROM information_schema.key_column_usage WHERE referenced_table_name IS NOT NULL AND TABLE_NAME='" + i[0] + "' AND TABLE_SCHEMA='"+DB_DATABASE+"'")
     ref = cursor_reff.fetchall()
-    print(ref)
+    for j in ref:
+        print("| " + str(j))
     # --------------------------------------------------
 
-    tbl = {"name": i[0], "show": True, "auth" : True}
+    tbl = {"name": i[0], "show": True, "auth": True}
     rows = []
 
     print("+----------------------------------------------------------+")
     for item in table:
         print("| " + str(item))
-        value   = item[0]
+        value = item[0]
         ref_tab = ""
         for ref_i in ref:
             if(i[0] in ref_i[0].split('.')[:1] and item[0] in ref_i[0].split('.')[1:]):
                 value = 1
                 ref_tab = ref_i[1].split('.')
-        rows.append({"row": item[0], "show": True , "value" : value, "ref" : ref_tab})
-        
+        rows.append({"row": item[0], "show": True,
+                     "value": value, "ref": ref_tab})
+
     tbl["rows"] = rows
     table_json.append(tbl)
     print("+----------------------------------------------------------+\n")
