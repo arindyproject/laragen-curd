@@ -11,7 +11,7 @@ import json
 
 
 # load file .env to get database connetion
-env_path = Path('.') / '.env'
+env_path = Path('../../') / '.env'
 load_dotenv(dotenv_path=env_path)
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
@@ -49,7 +49,7 @@ for i in tables:
         print("| " + str(j))
     # --------------------------------------------------
 
-    tbl = {"name": i[0], "show": True, "auth": True}
+    tbl = {"name": i[0], "show": True, "auth": True, "template" : 'default'}
     rows = []
 
     print("+----------------------------------------------------------+")
@@ -70,6 +70,6 @@ for i in tables:
 
 sorted_string = json.dumps(table_json, indent=4, sort_keys=True)
 # print(sorted_string)
-with open('json_tables.json', "w") as file_write:
+with open('../json/tables.json', "w") as file_write:
     # write json data into file
     json.dump(table_json, file_write)
