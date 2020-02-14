@@ -3,6 +3,8 @@
     "show": true,
     "auth": false,
     "template": "default",
+    "action": ["view", "edit", "delete"],
+    "ref": 2,
     "rows": [{
         "row": "id",
         "show": true,
@@ -24,9 +26,14 @@
         "value": "harga",
         "ref": ""
     }, {
+        "row": "produk",
+        "show": true,
+        "value": "nama",
+        "ref": ["produks", "id"]
+    }, {
         "row": "author",
         "show": true,
-        "value": 1,
+        "value": "name",
         "ref": ["users", "id"]
     }, {
         "row": "created_at",
@@ -40,88 +47,12 @@
         "ref": ""
     }]
 }, {
-    "name": "failed_jobs",
-    "show": false,
-    "auth": true,
-    "template": "default",
-    "rows": [{
-        "row": "id",
-        "show": true,
-        "value": "id",
-        "ref": ""
-    }, {
-        "row": "connection",
-        "show": true,
-        "value": "connection",
-        "ref": ""
-    }, {
-        "row": "queue",
-        "show": true,
-        "value": "queue",
-        "ref": ""
-    }, {
-        "row": "payload",
-        "show": true,
-        "value": "payload",
-        "ref": ""
-    }, {
-        "row": "exception",
-        "show": true,
-        "value": "exception",
-        "ref": ""
-    }, {
-        "row": "failed_at",
-        "show": true,
-        "value": "failed_at",
-        "ref": ""
-    }]
-}, {
-    "name": "migrations",
-    "show": false,
-    "auth": true,
-    "template": "default",
-    "rows": [{
-        "row": "id",
-        "show": true,
-        "value": "id",
-        "ref": ""
-    }, {
-        "row": "migration",
-        "show": true,
-        "value": "migration",
-        "ref": ""
-    }, {
-        "row": "batch",
-        "show": true,
-        "value": "batch",
-        "ref": ""
-    }]
-}, {
-    "name": "password_resets",
-    "show": false,
-    "auth": true,
-    "template": "default",
-    "rows": [{
-        "row": "email",
-        "show": true,
-        "value": "email",
-        "ref": ""
-    }, {
-        "row": "token",
-        "show": true,
-        "value": "token",
-        "ref": ""
-    }, {
-        "row": "created_at",
-        "show": true,
-        "value": "created_at",
-        "ref": ""
-    }]
-}, {
     "name": "produks",
     "show": true,
     "auth": false,
     "template": "default",
+    "action": ["view", "edit", "delete"],
+    "ref": 0,
     "rows": [{
         "row": "id",
         "show": true,
@@ -141,52 +72,6 @@
         "row": "kadaluwarsa",
         "show": true,
         "value": "kadaluwarsa",
-        "ref": ""
-    }, {
-        "row": "created_at",
-        "show": true,
-        "value": "created_at",
-        "ref": ""
-    }, {
-        "row": "updated_at",
-        "show": true,
-        "value": "updated_at",
-        "ref": ""
-    }]
-}, {
-    "name": "users",
-    "show": false,
-    "auth": true,
-    "template": "default",
-    "rows": [{
-        "row": "id",
-        "show": true,
-        "value": "id",
-        "ref": ""
-    }, {
-        "row": "name",
-        "show": true,
-        "value": "name",
-        "ref": ""
-    }, {
-        "row": "email",
-        "show": true,
-        "value": "email",
-        "ref": ""
-    }, {
-        "row": "email_verified_at",
-        "show": true,
-        "value": "email_verified_at",
-        "ref": ""
-    }, {
-        "row": "password",
-        "show": true,
-        "value": "password",
-        "ref": ""
-    }, {
-        "row": "remember_token",
-        "show": true,
-        "value": "remember_token",
         "ref": ""
     }, {
         "row": "created_at",
