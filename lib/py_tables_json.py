@@ -52,8 +52,8 @@ for i in tables:
             print("| " + str(j))
         # --------------------------------------------------
 
-        tbl = {"name": i[0], "show": True, "auth": True,
-               "template": 'default', "action": ["view", "edit", "delete"], "ref": len(ref)}
+        tbl = {"name": i[0], "auth": True,
+               "template": 'default', "action": ["table", "create", "view", "edit", "delete"], "ref": len(ref)}
         rows = []
 
         print("+----------------------------------------------------------+")
@@ -65,8 +65,8 @@ for i in tables:
                 if(i[0] in ref_i[0].split('.')[:1] and item[0] in ref_i[0].split('.')[1:]):
                     ref_tab = ref_i[1].split('.')
                     cursor_reff_val.execute("DESCRIBE " + ref_tab[0])
-                    value = cursor_reff_val.fetchall()[1][0] # [1] is position colunm name
-            rows.append({"row": item[0], "show": True,
+                    value = cursor_reff_val.fetchall()[1][0]
+            rows.append({"row": item[0], "show": True,  "item": [item[1], item[2], item[3], item[4], item[5]],
                          "value": value, "ref": ref_tab})
 
         tbl["rows"] = rows
