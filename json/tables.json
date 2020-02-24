@@ -1,1 +1,160 @@
-[{"name": "bukus", "auth": true, "template": "default", "action": ["table", "create", "view", "edit", "delete"], "ref": 2, "rows": [{"row": "id", "show": true, "item": ["bigint(20) unsigned", "NO", "PRI", null, "auto_increment"], "value": "id", "ref": ""}, {"row": "kode", "show": true, "item": ["varchar(100)", "YES", "", null, ""], "value": "kode", "ref": ""}, {"row": "nama", "show": true, "item": ["varchar(255)", "NO", "", null, ""], "value": "nama", "ref": ""}, {"row": "jemis", "show": true, "item": ["varchar(20)", "YES", "", null, ""], "value": "jemis", "ref": ""}, {"row": "harga", "show": true, "item": ["int(11)", "NO", "", null, ""], "value": "harga", "ref": ""}, {"row": "keterangan", "show": true, "item": ["text", "YES", "", null, ""], "value": "keterangan", "ref": ""}, {"row": "tgl", "show": true, "item": ["date", "YES", "", null, ""], "value": "tgl", "ref": ""}, {"row": "produk", "show": true, "item": ["bigint(20) unsigned", "YES", "MUL", null, ""], "value": "nama", "ref": ["produks", "id"]}, {"row": "author", "show": true, "item": ["bigint(20) unsigned", "YES", "MUL", null, ""], "value": "name", "ref": ["users", "id"]}, {"row": "created_at", "show": true, "item": ["timestamp", "YES", "", null, ""], "value": "created_at", "ref": ""}, {"row": "updated_at", "show": true, "item": ["timestamp", "YES", "", null, ""], "value": "updated_at", "ref": ""}]}, {"name": "produks", "auth": true, "template": "default", "action": ["table", "create", "view", "edit", "delete"], "ref": 0, "rows": [{"row": "id", "show": true, "item": ["bigint(20) unsigned", "NO", "PRI", null, "auto_increment"], "value": "id", "ref": ""}, {"row": "nama", "show": true, "item": ["varchar(255)", "NO", "", null, ""], "value": "nama", "ref": ""}, {"row": "harga", "show": true, "item": ["int(11)", "NO", "", null, ""], "value": "harga", "ref": ""}, {"row": "kadaluwarsa", "show": true, "item": ["date", "NO", "", null, ""], "value": "kadaluwarsa", "ref": ""}, {"row": "created_at", "show": true, "item": ["timestamp", "YES", "", null, ""], "value": "created_at", "ref": ""}, {"row": "updated_at", "show": true, "item": ["timestamp", "YES", "", null, ""], "value": "updated_at", "ref": ""}]}]
+[{
+    "name": "bukus",
+    "auth": true,
+    "template": "default",
+    "action": ["table", "create", "view", "edit", "delete"],
+    "ref": 2,
+    "rows": [{
+        "row": "id",
+        "show": true,
+        "item": ["bigint(20) unsigned", "NO", "PRI", null, "auto_increment"],
+        "value": "id",
+        "ref": ""
+    }, {
+        "row": "kode",
+        "show": true,
+        "item": ["varchar(100)", "YES", "", null, ""],
+        "value": "kode",
+        "ref": ""
+    }, {
+        "row": "nama",
+        "show": true,
+        "item": ["varchar(255)", "NO", "", null, ""],
+        "value": "nama",
+        "ref": ""
+    }, {
+        "row": "jemis",
+        "show": true,
+        "item": ["varchar(20)", "YES", "", null, ""],
+        "value": "jemis",
+        "ref": ""
+    }, {
+        "row": "harga",
+        "show": true,
+        "item": ["int(11)", "NO", "", null, ""],
+        "value": "harga",
+        "ref": ""
+    }, {
+        "row": "keterangan",
+        "show": true,
+        "item": ["text", "YES", "", null, ""],
+        "value": "keterangan",
+        "ref": ""
+    }, {
+        "row": "tgl",
+        "show": true,
+        "item": ["date", "YES", "", null, ""],
+        "value": "tgl",
+        "ref": ""
+    }, {
+        "row": "produk",
+        "show": true,
+        "item": ["bigint(20) unsigned", "YES", "MUL", null, ""],
+        "value": "nama",
+        "ref": ["produks", "id"]
+    }, {
+        "row": "author",
+        "show": true,
+        "item": ["bigint(20) unsigned", "YES", "MUL", null, ""],
+        "value": "name",
+        "ref": ["users", "id"]
+    }, {
+        "row": "created_at",
+        "show": true,
+        "item": ["timestamp", "YES", "", null, ""],
+        "value": "created_at",
+        "ref": ""
+    }, {
+        "row": "updated_at",
+        "show": true,
+        "item": ["timestamp", "YES", "", null, ""],
+        "value": "updated_at",
+        "ref": ""
+    }]
+}, {
+    "name": "pegawais",
+    "auth": true,
+    "template": "default",
+    "action": ["table", "view", "edit", "delete"],
+    "ref": 0,
+    "rows": [{
+        "row": "id",
+        "show": true,
+        "item": ["bigint(20) unsigned", "NO", "PRI", null, "auto_increment"],
+        "value": "id",
+        "ref": ""
+    }, {
+        "row": "nama",
+        "show": true,
+        "item": ["varchar(255)", "NO", "", null, ""],
+        "value": "nama",
+        "ref": ""
+    }, {
+        "row": "alamat",
+        "show": true,
+        "item": ["text", "NO", "", null, ""],
+        "value": "alamat",
+        "ref": ""
+    }, {
+        "row": "tgl_lahir",
+        "show": true,
+        "item": ["date", "NO", "", null, ""],
+        "value": "tgl_lahir",
+        "ref": ""
+    }, {
+        "row": "created_at",
+        "show": true,
+        "item": ["timestamp", "YES", "", null, ""],
+        "value": "created_at",
+        "ref": ""
+    }, {
+        "row": "updated_at",
+        "show": true,
+        "item": ["timestamp", "YES", "", null, ""],
+        "value": "updated_at",
+        "ref": ""
+    }]
+}, {
+    "name": "produks",
+    "auth": true,
+    "template": "default",
+    "action": ["table", "create", "view", "edit", "delete"],
+    "ref": 0,
+    "rows": [{
+        "row": "id",
+        "show": true,
+        "item": ["bigint(20) unsigned", "NO", "PRI", null, "auto_increment"],
+        "value": "id",
+        "ref": ""
+    }, {
+        "row": "nama",
+        "show": true,
+        "item": ["varchar(255)", "NO", "", null, ""],
+        "value": "nama",
+        "ref": ""
+    }, {
+        "row": "harga",
+        "show": true,
+        "item": ["int(11)", "NO", "", null, ""],
+        "value": "harga",
+        "ref": ""
+    }, {
+        "row": "kadaluwarsa",
+        "show": true,
+        "item": ["date", "NO", "", null, ""],
+        "value": "kadaluwarsa",
+        "ref": ""
+    }, {
+        "row": "created_at",
+        "show": true,
+        "item": ["timestamp", "YES", "", null, ""],
+        "value": "created_at",
+        "ref": ""
+    }, {
+        "row": "updated_at",
+        "show": true,
+        "item": ["timestamp", "YES", "", null, ""],
+        "value": "updated_at",
+        "ref": ""
+    }]
+}]

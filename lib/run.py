@@ -8,8 +8,17 @@ import make_view
 try:
     _json_tables = open('../json/tables.json').read()
     print('File tables.json ditemukan apakah anda ingin mengedit file tersebut atau lanjut?')
-    _a = str(input('pencet "y" untuk lanjut / "n" untuk edit dulu : '))
+    _a = str(input('pencet "y" untuk lanjut / "r" untuk reset file : '))
     if _a.lower() == 'y':
+        # make resourece controller
+        make_controller.run()
+        # make view react.js
+        gen_react_view.run()
+        # make view controller
+        make_view.run()
+    elif _a.lower() == 'r':
+        # read database
+        py_tables_json.run()
         # make resourece controller
         make_controller.run()
         # make view react.js
