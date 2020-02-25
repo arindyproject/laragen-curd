@@ -14,27 +14,40 @@ export default class name_class extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            //stateitem
         };
         // bind handleSubmit method
         this.handleSubmit = this.handleSubmit.bind(this);
+        // bind handle Form
+        //binditem
     }
 
     // create handleSubmit
     handleSubmit(e) {
         // stop browser's default behaviour of reloading on form submit
         e.preventDefault();
-        console.log('hallo');
+        const data = {
+            //dataitem
+        }
+        let uri = '//url';
+        axios.post(uri, data).then((response) => {
+
+        });
+
     }
+
+    //handleitem
 
     render() {
         return (
             <div>
                 <h5>Create //name</h5>
-                <Form as={Row} onSubmit={this.handleSubmit}>
-                    //item
-                    <Button variant="outline-success" block type="submit">Submit</Button>
-                </Form>
+                <form onSubmit={this.handleSubmit}>
+                    <Row>
+                        //item
+                        <Button variant="outline-success" block type="submit">Submit</Button>
+                    </Row>
+                </form>
             </div>
         );
     }

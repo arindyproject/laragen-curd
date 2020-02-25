@@ -17,6 +17,10 @@ def react_make_create(name):
     for i in _json_tables:
         _temp_create = _react_create
         _item_form = ""
+        _state_item = ""
+        _handle_item_function = ""
+        _bind_item_function = ""
+        _data_item = ""
         if(i['name'] == name):  # check table name
             # nama class index
             _temp_create = _temp_create.replace(
@@ -29,14 +33,32 @@ def react_make_create(name):
                 '@nameid', 'create' + i['name'].lower())
             # item form
             for _item in i['rows']:
+
                 if(_item['row'] not in ['created_at', 'updated_at']):
                     if(_item['item'][4] != "auto_increment"):
+                        # make state item
+                        _state_item += "\t\t\t" + \
+                            _item['row'].lower() + " : '',\n"
+                        # make bind function item
+                        _bind_item_function += "\t\tthis.handle" + \
+                            _item['row'].capitalize()+" = this.handle" + \
+                            _item['row'].capitalize()+".bind(this);\n"
+                        # make function handle item form
+                        _handle_item_function += "\thandle" + \
+                            _item['row'].capitalize() + "(e){\n"
+                        _handle_item_function += "\t\tthis.setState({\n\t\t\t" + _item['row'].lower(
+                        ) + " : e.target.value \n\t\t})\n"
+                        _handle_item_function += "\t}\n"
+                        # data item
+                        _data_item += "\t\t\t" + \
+                            _item['row'].lower() + " : this.state." + \
+                            _item['row'].lower() + ",\n"
                         # open
                         _item_form += '<Col sm="12" md="6" lg="4" xl="3"> \n<Form.Group controlId="form' + \
                             _item['row'].capitalize()+'">\n'
                         # label
                         _item_form += '<Form.Label>' + \
-                            _item['row'].capitalize()+'</Form.Label>'
+                            _item['row'].capitalize()+'</Form.Label>\n'
                         # input / select
                         # check required
                         _required_item = ""
@@ -52,11 +74,13 @@ def react_make_create(name):
                             elif 'date' in _item['item'][0]:
                                 _type_item = "date"
 
-                            _item_form += '<Form.Control type="'+_type_item+'" placeholder="' + \
+                            _item_form += '<Form.Control onChange={this.handle'+_item['row'].capitalize()+'} value={this.state.'+_item['row'].lower()+'} type="'+_type_item+'" placeholder="' + \
                                 _item['row'].capitalize()+'" ' + \
                                 _required_item+' />\n'
                         else:
-                            _item_form += '<Form.Control as="select" '+_required_item+' >\n'
+
+                            _item_form += '<Form.Control onChange={this.handle'+_item['row'].capitalize(
+                            )+'} value={this.state.'+_item['row'].lower()+'} as="select" '+_required_item+' >\n'
                             _item_form += '<option>1</option><option>2</option><option>3</option>\n'
                             _item_form += '</Form.Control>\n'
                         # close
@@ -64,6 +88,21 @@ def react_make_create(name):
             # create form
             _temp_create = _temp_create.replace(
                 '//item', _item_form)
+            # make state item
+            _temp_create = _temp_create.replace(
+                '//stateitem', _state_item)
+            # make bind function item
+            _temp_create = _temp_create.replace(
+                '//binditem', _bind_item_function)
+            # data item
+            _temp_create = _temp_create.replace(
+                '//dataitem', _data_item)
+            # url post
+            _temp_create = _temp_create.replace(
+                '//url', 'gen/' + i['name'].lower())
+            # create handle function
+            _temp_create = _temp_create.replace(
+                '//handleitem', _handle_item_function)
             # make file index
             # ================================================================================================
             with open('../../resources/js/pages/' + i['name'].lower() + '/Create' + i['name'].capitalize() + '.js', "w") as file_write:
