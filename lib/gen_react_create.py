@@ -21,6 +21,8 @@ def react_make_create(name):
         _handle_item_function = ""
         _bind_item_function = ""
         _data_item = ""
+        _state_item_options = ""
+        _componentdidmount = ""
         if(i['name'] == name):  # check table name
             # nama class index
             _temp_create = _temp_create.replace(
@@ -78,10 +80,17 @@ def react_make_create(name):
                                 _item['row'].capitalize()+'" ' + \
                                 _required_item+' />\n'
                         else:
-
+                            #_componentdidmount
+                            _componentdidmount = "this.getOptions();"
+                            # make state item
+                            _state_item += "\t\t\t" +  _item['row'].lower() + "Options : [],\n"
+                            _item['row'].lower() + " : '',\n"
+                            #make state item options
+                            _state_item_options += "\t\t" + _item['row'].lower() + "Options : response.data." + _item['ref'][0].lower() + ",\n"
+                            #make select form
                             _item_form += '<Form.Control onChange={this.handle'+_item['row'].capitalize(
                             )+'} value={this.state.'+_item['row'].lower()+'} as="select" '+_required_item+' >\n'
-                            _item_form += '<option>1</option><option>2</option><option>3</option>\n'
+                            _item_form += "{this.state."+_item['row'].lower()+"Options.map((data)=> <option key={data."+_item['ref'][1]+"}>{data."+_item['value']+"}</option>)}\n"
                             _item_form += '</Form.Control>\n'
                         # close
                         _item_form += "</Form.Group> \n</Col>\n\n"
@@ -91,6 +100,9 @@ def react_make_create(name):
             # make state item
             _temp_create = _temp_create.replace(
                 '//stateitem', _state_item)
+            # make state options item
+            _temp_create = _temp_create.replace(
+                '//stateoptionsitems', _state_item_options)
             # make bind function item
             _temp_create = _temp_create.replace(
                 '//binditem', _bind_item_function)
@@ -100,9 +112,15 @@ def react_make_create(name):
             # url post
             _temp_create = _temp_create.replace(
                 '//url', 'gen/' + i['name'].lower())
+            #url options
+            _temp_create = _temp_create.replace(
+                '//optionsurl', 'gen/' + i['name'].lower() + "/create")
             # create handle function
             _temp_create = _temp_create.replace(
                 '//handleitem', _handle_item_function)
+            #_componentdidmount
+            _temp_create = _temp_create.replace(
+                '//componentdidmount', _componentdidmount)
             # make file index
             # ================================================================================================
             with open('../../resources/js/pages/' + i['name'].lower() + '/Create' + i['name'].capitalize() + '.js', "w") as file_write:

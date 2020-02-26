@@ -22,6 +22,23 @@ export default class name_class extends Component {
         //binditem
     }
 
+
+    //componentDidMount
+    componentDidMount() {
+        //componentdidmount
+    }
+
+
+    //get options
+    getOptions(){
+        let uri = '//optionsurl'
+        axios.get(uri).then((response) => {
+            this.setState({
+        //stateoptionsitems
+            })
+        });
+    }
+
     // create handleSubmit
     handleSubmit(e) {
         // stop browser's default behaviour of reloading on form submit

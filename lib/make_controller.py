@@ -127,7 +127,7 @@ def run():
                             ref_i['ref'][0] + \
                             " = DB::table('" + \
                             ref_i['ref'][0] + \
-                            "')->pluck('" + ref_i['value'] + "','id'); \n\t\t"
+                            "')->select('id', '"+ ref_i['value'] +"')->get(); \n\t\t"
                         _create_text_return += "'" + \
                             ref_i['ref'][0] + "' => $" + ref_i['ref'][0] + ","
                         # end membuat create method
