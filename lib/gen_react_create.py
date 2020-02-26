@@ -80,17 +80,21 @@ def react_make_create(name):
                                 _item['row'].capitalize()+'" ' + \
                                 _required_item+' />\n'
                         else:
-                            #_componentdidmount
+                            # _componentdidmount
                             _componentdidmount = "this.getOptions();"
                             # make state item
-                            _state_item += "\t\t\t" +  _item['row'].lower() + "Options : [],\n"
+                            _state_item += "\t\t\t" + \
+                                _item['row'].lower() + "Options : [],\n"
                             _item['row'].lower() + " : '',\n"
-                            #make state item options
-                            _state_item_options += "\t\t" + _item['row'].lower() + "Options : response.data." + _item['ref'][0].lower() + ",\n"
-                            #make select form
+                            # make state item options
+                            _state_item_options += "\t\t" + \
+                                _item['row'].lower() + "Options : response.data." + \
+                                _item['ref'][0].lower() + ",\n"
+                            # make select form
                             _item_form += '<Form.Control onChange={this.handle'+_item['row'].capitalize(
                             )+'} value={this.state.'+_item['row'].lower()+'} as="select" '+_required_item+' >\n'
-                            _item_form += "{this.state."+_item['row'].lower()+"Options.map((data)=> <option key={data."+_item['ref'][1]+"}>{data."+_item['value']+"}</option>)}\n"
+                            _item_form += "{this.state."+_item['row'].lower(
+                            ) + "Options.map((data)=> <option key={data.value} value={data.value}>{data.name}</option>)}\n"
                             _item_form += '</Form.Control>\n'
                         # close
                         _item_form += "</Form.Group> \n</Col>\n\n"
@@ -112,13 +116,13 @@ def react_make_create(name):
             # url post
             _temp_create = _temp_create.replace(
                 '//url', 'gen/' + i['name'].lower())
-            #url options
+            # url options
             _temp_create = _temp_create.replace(
                 '//optionsurl', 'gen/' + i['name'].lower() + "/create")
             # create handle function
             _temp_create = _temp_create.replace(
                 '//handleitem', _handle_item_function)
-            #_componentdidmount
+            # _componentdidmount
             _temp_create = _temp_create.replace(
                 '//componentdidmount', _componentdidmount)
             # make file index

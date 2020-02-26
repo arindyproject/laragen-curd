@@ -2,4 +2,4 @@
 
 ## required :
 * pip3 install -U python-dotenv
-* https://react.rocks/example/react-structured-filter
+* npm install react-bootstrap bootstrap
