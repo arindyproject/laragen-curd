@@ -26,6 +26,12 @@ def react_make_table(name):
             # name id
             _temp_table = _temp_table.replace(
                 '@nameid', 'table' + i['name'].lower())
+            # get url
+            _temp_table = _temp_table.replace(
+                "//url", "gen/" + i['name'].lower())
+            # data name
+            _temp_table = _temp_table.replace(
+                "//dataname",  i['name'].lower())
             # make file index
             # ================================================================================================
             with open('../../resources/js/pages/' + i['name'].lower() + '/Table' + i['name'].capitalize() + '.js', "w") as file_write:
