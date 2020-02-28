@@ -77,7 +77,7 @@ def run():
                             "." + ref_i['ref'][1] + "')\n"
                 _select_text += ")"
                 _index_text += _select_text
-                _index_text += "\n\t\t->get();\n\t\t"
+                _index_text += "\n\t\t->orderBy('id','DESC')->get();\n\t\t"
             else:
                 # make variabel data from database
                 _index_text = "$" + i['name'] + \

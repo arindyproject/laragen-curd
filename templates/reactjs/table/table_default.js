@@ -2,6 +2,10 @@ import React, {
     Component
 } from 'react';
 import ReactDOM from 'react-dom';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter, numberFilter , dateFilter } from 'react-bootstrap-table2-filter';
+
 //import
 
 export default class name_class extends Component {
@@ -36,14 +40,14 @@ export default class name_class extends Component {
     }
 
     render() {
+        const data = [];
+        const columns = [
+            //itemcolumns
+        ];
         return (
             <div>
                 <h5>Table //name</h5>
-                {
-                    this.state.data.map((vv) =>
-                        <h2>{vv.id}</h2>
-                    )
-                }
+                <BootstrapTable bootstrap4 keyField='id' data={this.state.data} columns={columns} filter={filterFactory()} pagination={paginationFactory()} striped hover condensed />
             </div>
         );
     }
