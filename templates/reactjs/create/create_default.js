@@ -20,13 +20,23 @@ export default class name_class extends Component {
         };
         // bind handleSubmit method
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.refreshCreate = this.refreshCreate.bind(this);
         // bind handle Form
         //binditem
+    }
+
+    //refresh Create
+    refreshCreate(){
+        this.setState({
+            isSuccess : false,
+            isError  : false,
+        });
     }
 
 
     //componentDidMount
     componentDidMount() {
+        this.props.refresh(this.refreshCreate);
         //componentdidmount
     }
 

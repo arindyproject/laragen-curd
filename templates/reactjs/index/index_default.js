@@ -8,11 +8,16 @@ import Tab from 'react-bootstrap/Tab';
 //import
 
 export default class name_class extends Component {
+
+    refreshComponents(item){
+       //itemrefresh
+    }
+
     render() {
         return (
             <div>
                 <h5>//name</h5>
-                <Tabs defaultActiveKey="" id="uncontrolled-tab-example">
+                <Tabs defaultActiveKey="table" id="uncontrolled-tab-example" onSelect={(item) => this.refreshComponents(item)}>
                 //tabitem
                 </Tabs>
             </div>

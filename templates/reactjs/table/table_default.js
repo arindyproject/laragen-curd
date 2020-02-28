@@ -20,6 +20,7 @@ export default class name_class extends Component {
     //componentDidMount
     componentDidMount() {
         this.getData();
+        this.props.refresh(this.getData);
         //componentdidmount
     }
 

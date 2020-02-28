@@ -58,9 +58,7 @@ def react_make_create(name):
                         # open
                         _item_form += '<Col sm="12" md="6" lg="4" xl="3"> \n<Form.Group controlId="form' + \
                             _item['row'].capitalize()+'">\n'
-                        # label
-                        _item_form += '<Form.Label>' + \
-                            _item['row'].capitalize()+'</Form.Label>\n'
+                        
                         # input / select
                         # check required
                         _required_item = ""
@@ -75,11 +73,19 @@ def react_make_create(name):
                                 _type_item = "number"
                             elif 'date' in _item['item'][0]:
                                 _type_item = "date"
+                            elif 'text' in _item['item'][0]:
+                                _type_item = "textarea"
+
+                            # label
+                            _item_form += '<Form.Label>' + \
+                            _item['row'].capitalize()+'</Form.Label>\n'
 
                             _item_form += '<Form.Control onChange={this.handle'+_item['row'].capitalize()+'} value={this.state.'+_item['row'].lower()+'} type="'+_type_item+'" placeholder="' + \
                                 _item['row'].capitalize()+'" ' + \
                                 _required_item+' />\n'
                         else:
+                            # label
+                            _item_form += '<Form.Label> <a href="'+_item['ref'][0].lower()+'">+ '+_item['row'].capitalize()+'</a></Form.Label>\n'
                             # _componentdidmount
                             _componentdidmount = "this.getOptions();"
                             # make state item

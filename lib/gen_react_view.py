@@ -27,6 +27,7 @@ def run():
         _temp_index = _react_index
         _tabs_item = ""
         _import_item = ""
+        _item_refresh = ""
         # membuat tabs / Index
         # ================================================================================================
         Path("../../resources/js/pages/" +
@@ -44,11 +45,13 @@ def run():
                   i['name'].capitalize() + '.js"')
             # add item tabs table
             _tabs_item += '\t\t\t\t<Tab eventKey="table" title="Table"><Table' + \
-                i['name'].capitalize()+' /></Tab>\n'
+                i['name'].capitalize()+'  refresh={clickrefreshtable => this.refreshTable = clickrefreshtable} /></Tab>\n'
             # import class table
             _import_item += "\nimport Table" + \
                 i['name'].capitalize() + " from './Table" + \
                 i['name'].capitalize() + "';"
+            #item refresh
+            _item_refresh += "if(item == 'table'){this.refreshTable()}"
 
         # check if need create / add
         # ================================================================================================
@@ -60,11 +63,13 @@ def run():
             # add item tabs create
             _tabs_item += '\t\t\t\t<Tab eventKey="create" title="Add New ' + \
                 i['name'].capitalize()+'"><Create' + \
-                i['name'].capitalize()+' /></Tab>\n'
+                i['name'].capitalize()+' refresh={clickrefreshcreate => this.refreshCreate = clickrefreshcreate} /></Tab>\n'
             # import class create
             _import_item += "\nimport Create" + \
                 i['name'].capitalize() + " from './Create" + \
                 i['name'].capitalize() + "';"
+            #item refresh
+            _item_refresh += "if(item == 'create'){this.refreshCreate()}"
 
         # make file index
         # ================================================================================================
@@ -84,6 +89,9 @@ def run():
             # import class
             _temp_index = _temp_index.replace(
                 '//import', _import_item)
+            # refreh item
+            _temp_index = _temp_index.replace(
+                '//itemrefresh', _item_refresh)
             file_write.write(_temp_index)
             file_write.close()
 
