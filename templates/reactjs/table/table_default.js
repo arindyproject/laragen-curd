@@ -28,6 +28,9 @@ export default class name_class extends Component {
         //componentdidmount
     }
 
+
+    //actionmethod
+
     //get data
     getData() {
         let uri = '//url'

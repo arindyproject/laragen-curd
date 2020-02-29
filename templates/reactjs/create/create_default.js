@@ -90,7 +90,7 @@ export default class name_class extends Component {
         if (this.state.isSuccess) {
             return (
                 <Alert variant="success" onClose={() => this.setState({ isSuccess: false })} dismissible>
-                    Success
+                    Create Success
                 </Alert>
             );
         }
@@ -98,8 +98,8 @@ export default class name_class extends Component {
     alertError() {
         if (this.state.isError) {
             return (
-                <Alert variant="success" onClose={() => this.setState({ isError: false })} dismissible>
-                    Success
+                <Alert variant="danger" onClose={() => this.setState({ isError: false })} dismissible>
+                    Create Error
                 </Alert>
             );
         }
@@ -109,6 +109,7 @@ export default class name_class extends Component {
             <div>
                 <h5>Create //name</h5>
                 {this.alertSuccess()}
+                {this.alertError()}
                 <form onSubmit={this.handleSubmit}>
                     <Row>
                         //item

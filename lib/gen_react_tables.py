@@ -21,6 +21,12 @@ def react_make_table(name):
             # //itemcolumns
             _item_columns = ""
 
+            # method
+            _method_action = ""
+
+            #//binditem
+            _bind_item = ""
+
             # nama class index
             _temp_table = _temp_table.replace(
                 "name_class", 'Table' + i['name'].capitalize())
@@ -36,6 +42,16 @@ def react_make_table(name):
             # data name
             _temp_table = _temp_table.replace(
                 "//dataname",  i['name'].lower())
+
+            # make delete
+            if 'delete' in i['action']:
+                _bind_item += "this.handleDelete = this.handleDelete.bind(this);\n"
+                _method_action += "handleDelete(e,id) {"
+                _method_action += "\n\t\te.preventDefault();"
+                _method_action += "\n\t\taxios.delete('gen/"+i['name'].lower()+"/id').then((response) => {"
+                _method_action += "\n\t\t\tthis.getData();"
+                _method_action += "\n\t\t});"
+                _method_action += "\n\t}\n"
 
             # read item rows
             for row in i['rows']:
@@ -65,6 +81,10 @@ def react_make_table(name):
             # itemcolumns
             _temp_table = _temp_table.replace(
                 "//itemcolumns", _item_columns)
+
+            # make method action
+            _temp_table = _temp_table.replace(
+                "//actionmethod", _method_action)
             # make file index
             # ================================================================================================
             with open('../../resources/js/pages/' + i['name'].lower() + '/Table' + i['name'].capitalize() + '.js', "w") as file_write:
