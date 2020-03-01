@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import Card from 'react-bootstrap/Card';
 //import
 
 export default class name_class extends Component {
@@ -26,10 +27,10 @@ export default class name_class extends Component {
     }
 
     //refresh Create
-    refreshCreate(){
+    refreshCreate() {
         this.setState({
-            isSuccess : false,
-            isError  : false,
+            isSuccess: false,
+            isError: false,
         });
     }
 
@@ -107,15 +108,19 @@ export default class name_class extends Component {
     render() {
         return (
             <div>
-                <h5>Create //name</h5>
-                {this.alertSuccess()}
-                {this.alertError()}
-                <form onSubmit={this.handleSubmit}>
-                    <Row>
-                        //item
-                        <Button variant="outline-success" block type="submit">{this.state.isLoading ? 'Loading...' : 'Submit'}</Button>
-                    </Row>
-                </form>
+                <Card>
+                    <Card.Body>
+                        <h5>Create //name</h5>
+                        {this.alertSuccess()}
+                        {this.alertError()}
+                        <form onSubmit={this.handleSubmit}>
+                            <Row>
+                                //item
+                                <Button variant="outline-success" block type="submit">{this.state.isLoading ? 'Loading...' : 'Submit'}</Button>
+                            </Row>
+                        </form>
+                    </Card.Body>
+                </Card>
             </div >
         );
     }

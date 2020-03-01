@@ -24,7 +24,7 @@ def react_make_table(name):
             # method
             _method_action = ""
 
-            #//binditem
+            # //binditem
             _bind_item = ""
 
             # nama class index
@@ -48,9 +48,25 @@ def react_make_table(name):
                 _bind_item += "this.handleDelete = this.handleDelete.bind(this);\n"
                 _method_action += "handleDelete(e,id) {"
                 _method_action += "\n\t\te.preventDefault();"
-                _method_action += "\n\t\taxios.delete('gen/"+i['name'].lower()+"/id').then((response) => {"
+                _method_action += "\n\t\taxios.delete('gen/" + \
+                    i['name'].lower()+"/' + id).then((response) => {"
                 _method_action += "\n\t\t\tthis.getData();"
+                _method_action += "\n\t\t\tthis.setState({isSeccess : true});"
                 _method_action += "\n\t\t});"
+                _method_action += "\n\t}\n"
+
+            # make edit
+            if 'edit' in i['action']:
+                _bind_item += "\t\tthis.handleEdit = this.handleEdit.bind(this);\n"
+                _method_action += "\n\thandleEdit(e,id) {"
+                _method_action += "\n\t\te.preventDefault();"
+                _method_action += "\n\t}\n"
+
+             # make view
+            if 'view' in i['action']:
+                _bind_item += "\t\tthis.handleView = this.handleView.bind(this);\n"
+                _method_action += "\n\thandleView(e,id) {"
+                _method_action += "\n\t\te.preventDefault();"
                 _method_action += "\n\t}\n"
 
             # read item rows
@@ -58,17 +74,17 @@ def react_make_table(name):
                 if row['show']:
                     _type_item_filter = ""
                     if row['ref'] == "":  # not refrerence / no select
-                            # check type filter
-                            if 'varchar' in row['item'][0]:
-                                _type_item_filter = "filter: textFilter()"
-                            elif 'int' in row['item'][0]:
-                                _type_item_filter = "filter: numberFilter()"
-                            elif 'date' in row['item'][0]:
-                                _type_item_filter = "filter: dateFilter()"
-                            elif 'text' in row['item'][0]:
-                                _type_item_filter = "filter: textFilter()"
-                            else :
-                                _type_item_filter = ""
+                        # check type filter
+                        if 'varchar' in row['item'][0]:
+                            _type_item_filter = "filter: textFilter()"
+                        elif 'int' in row['item'][0]:
+                            _type_item_filter = "filter: numberFilter()"
+                        elif 'date' in row['item'][0]:
+                            _type_item_filter = "filter: dateFilter()"
+                        elif 'text' in row['item'][0]:
+                            _type_item_filter = "filter: textFilter()"
+                        else:
+                            _type_item_filter = ""
                     else:
                         pass
                     _item_columns += "\n\t\t\t{\n\t\t\t\tdataField : '" + \
@@ -85,6 +101,10 @@ def react_make_table(name):
             # make method action
             _temp_table = _temp_table.replace(
                 "//actionmethod", _method_action)
+
+            # bind method action
+            _temp_table = _temp_table.replace(
+                "//binditem", _bind_item)
             # make file index
             # ================================================================================================
             with open('../../resources/js/pages/' + i['name'].lower() + '/Table' + i['name'].capitalize() + '.js', "w") as file_write:
