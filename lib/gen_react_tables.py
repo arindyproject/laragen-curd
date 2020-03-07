@@ -29,6 +29,15 @@ def react_make_table(name):
             # //binditem
             _bind_item = ""
 
+            #//import
+            _item_import = ""
+
+            #//stateitem
+            _state_item = ""
+
+            #//showcomponents
+            _show_components = ""
+
             # nama class index
             _temp_table = _temp_table.replace(
                 "name_class", 'Table' + i['name'].capitalize())
@@ -44,6 +53,8 @@ def react_make_table(name):
             # data name
             _temp_table = _temp_table.replace(
                 "//dataname",  i['name'].lower())
+
+
 
             # make delete
             if 'delete' in i['action']:
@@ -63,10 +74,22 @@ def react_make_table(name):
             # make edit
             if 'edit' in i['action']:
                 gen_react_edit.react_make_edit(i['name'].lower())
+                _item_import += "\nimport Edit"+i['name'].capitalize() + " from './Edit"+i['name'].capitalize()+"';" 
+                _state_item += "\n\t\t\tshowEdit : false,"
                 _bind_item += "\t\tthis.handleEdit = this.handleEdit.bind(this);\n"
                 _method_action += "\n\thandleEdit(e,id) {"
                 _method_action += "\n\t\te.preventDefault();"
                 _method_action += "\n\t}\n"
+
+                _method_action += "\n\tshowEdit(id) {"
+                _method_action += "\n\t\tif (this.state.showEdit && !this.state.isLoading) {"
+                _method_action += "\n\t\t\treturn ("
+                _method_action += "\n\t\t\t\t<Edit"+i['name'].capitalize()+" />"
+                _method_action += "\n\t\t\t);"
+                _method_action += "\n\t\t}"
+                _method_action += "\n\t}\n"
+
+                _show_components += "\n\t\t\t\t{this.showEdit()}"
 
              # make view
             if 'view' in i['action']:
@@ -111,6 +134,13 @@ def react_make_table(name):
             # bind method action
             _temp_table = _temp_table.replace(
                 "//binditem", _bind_item)
+
+            #import
+            _temp_table = _temp_table.replace("//import", _item_import)
+
+            #//showcomponents
+            _temp_table = _temp_table.replace(
+                "//showcomponents", _show_components)
             # make file index
             # ================================================================================================
             with open('../../resources/js/pages/' + i['name'].lower() + '/Table' + i['name'].capitalize() + '.js', "w") as file_write:

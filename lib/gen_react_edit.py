@@ -36,7 +36,7 @@ def react_make_edit(name):
             # item form
             for _item in i['rows']:
 
-                if(_item['row'] not in ['editd_at', 'updated_at']):
+                if(_item['row'] not in ['created_at', 'updated_at']):
                     if(_item['item'][4] != "auto_increment"):
                         # make state item
                         _state_item += "\t\t\t" + \
@@ -121,9 +121,12 @@ def react_make_edit(name):
             # data item
             _temp_edit = _temp_edit.replace(
                 '//dataitem', _data_item)
-            # url post
+            # url update
             _temp_edit = _temp_edit.replace(
                 '//url', 'gen/' + i['name'].lower())
+             # url data
+            _temp_edit = _temp_edit.replace(
+                '//dataurl', i['name'].lower())
             # url options
             _temp_edit = _temp_edit.replace(
                 '//optionsurl', 'gen/' + i['name'].lower() + "/edit")

@@ -17,27 +17,38 @@ export default class name_class extends Component {
         super(props);
         this.state = {
             isLoading: false,
+            data : [],
             //stateitem
         };
         // bind handleSubmit method
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.refreshCreate = this.refreshCreate.bind(this);
+        this.refreshEdit = this.refreshEdit.bind(this);
         // bind handle Form
         //binditem
     }
 
     //refresh Create
-    refreshCreate() {
+    refreshEdit() {
         this.setState({
             isSuccess: false,
             isError: false,
         });
     }
 
+    getData(){
+        let uri = "gen/"+ '//dataurl' + "/" + this.props.id + "/edit"
+        axios.get(uri).then((response) => {
+            this.setState({
+                data : response.data.//dataurl
+            })
+        });
+    }
+
 
     //componentDidMount
     componentDidMount() {
-        this.props.refresh(this.refreshCreate);
+        this.props.refresh(this.refreshEdit);
+        this.getData();
         //componentdidmount
     }
 
@@ -91,7 +102,7 @@ export default class name_class extends Component {
         if (this.state.isSuccess) {
             return (
                 <Alert variant="success" onClose={() => this.setState({ isSuccess: false })} dismissible>
-                    Create Success
+                    Edit Success
                 </Alert>
             );
         }
@@ -100,7 +111,7 @@ export default class name_class extends Component {
         if (this.state.isError) {
             return (
                 <Alert variant="danger" onClose={() => this.setState({ isError: false })} dismissible>
-                    Create Error
+                    Edit Error
                 </Alert>
             );
         }
@@ -110,7 +121,7 @@ export default class name_class extends Component {
             <div>
                 <Card>
                     <Card.Body>
-                        <h5>Create //name</h5>
+                        <h5>Edit //name</h5>
                         {this.alertSuccess()}
                         {this.alertError()}
                         <form onSubmit={this.handleSubmit}>
