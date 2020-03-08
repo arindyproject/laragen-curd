@@ -17,7 +17,7 @@ export default class name_class extends Component {
         super(props);
         this.state = {
             isLoading: false,
-            data : [],
+
             //stateitem
         };
         // bind handleSubmit method
@@ -35,11 +35,12 @@ export default class name_class extends Component {
         });
     }
 
-    getData(){
-        let uri = "gen/"+ '//dataurl' + "/" + this.props.id + "/edit"
+    getData() {
+
+        let uri = "gen/" + '//dataurl' + "/" + this.props.id + "/edit"
         axios.get(uri).then((response) => {
             this.setState({
-                data : response.data.//dataurl
+                //valueofitem
             })
         });
     }
@@ -47,7 +48,7 @@ export default class name_class extends Component {
 
     //componentDidMount
     componentDidMount() {
-        this.props.refresh(this.refreshEdit);
+        //this.props.refresh(this.refreshEdit);
         this.getData();
         //componentdidmount
     }
@@ -56,10 +57,9 @@ export default class name_class extends Component {
     //get options
     getOptions() {
 
-        let uri = '//optionsurl'
+        let uri = "gen/" + '//dataurl' + "/" + this.props.id + "/edit"
         axios.get(uri).then((response) => {
             this.setState({
-
                 //stateoptionsitems
             })
         });
@@ -76,14 +76,15 @@ export default class name_class extends Component {
         const data = {
             //dataitem
         }
-        let uri = '//url';
-        axios.post(uri, data).then((response) => {
+        let uri = '//url' + "/" + this.props.id;
+        axios.put(uri, data).then((response) => {
             this.setState({
                 isLoading: false,
                 isSuccess: true,
                 //reset form
                 //stateitem
             });
+            this.getData();
             //componentdidmount
         }).catch(function (error) {
             // handle error

@@ -2,11 +2,12 @@ import React, {
     Component
 } from 'react';
 import ReactDOM from 'react-dom';
-import Table from 'react-bootstrap/Table';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter, numberFilter, dateFilter } from 'react-bootstrap-table2-filter';
 import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import Spinner from 'react-bootstrap/Spinner';
-import { Pagination } from 'react-laravel-paginex';
 //import
 
 export default class name_class extends Component {
@@ -28,7 +29,7 @@ export default class name_class extends Component {
 
     //componentDidMount
     componentDidMount() {
-        this.getData(this.state.data);
+        this.getData();
         this.props.refresh(this.getData);
         //componentdidmount
     }
@@ -37,9 +38,9 @@ export default class name_class extends Component {
     //actionmethod
 
     //get data
-    getData(data = this.state.data) {
+    getData() {
         this.setState({ showTable: true, showEdit: false });
-        let uri = '//url' + '?page=' + data.page
+        let uri = '//url'
         axios.get(uri).then((response) => {
             this.setState({
                 isSuccess: false,
@@ -81,28 +82,22 @@ export default class name_class extends Component {
 
     showTable() {
         if (this.state.showTable && !this.state.isLoading) {
-
+            const rowEvents = {
+                onClick: (e, row, rowIndex) => {
+                    this.handleDelete(e, row.id);
+                }
+            };
+            const data = [];
+            const columns = [
+                //itemcolumns
+            ];
             return (
                 <Card>
                     <Card.Body>
                         <h5>Table //name</h5>
                         {this.alertSuccess()}
                         {this.alertError()}
-                        <Table responsive striped bordered hover size="sm">
-                            <thead>
-                                <tr>
-                                //itemcolumns
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.data.data.map((item) =>
-                                    <tr key={item.id}>
-                                    //itemrows
-                                    </tr>
-                                )}
-                            </tbody>
-                        </Table>
-                        <Pagination changePage={this.getData} data={this.state.data} />
+                        <BootstrapTable bootstrap4 keyField='id' data={this.state.data} columns={columns} filter={filterFactory()} pagination={paginationFactory()} striped hover condensed />
                     </Card.Body>
                 </Card>
             );

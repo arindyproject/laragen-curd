@@ -21,6 +21,7 @@ def react_make_edit(name):
         _handle_item_function = ""
         _bind_item_function = ""
         _data_item = ""
+        _item_value = ""
         _state_item_options = ""
         _componentdidmount = ""
         if(i['name'] == name):  # check table name
@@ -55,6 +56,10 @@ def react_make_edit(name):
                         _data_item += "\t\t\t" + \
                             _item['row'].lower() + " : this.state." + \
                             _item['row'].lower() + ",\n"
+                        # //valueofitem
+                        _item_value += "\n\t\t\t\t" + \
+                            _item['row'].lower() + " : response.data." + \
+                            i['name'].lower() + "." + _item['row'].lower() + ","
                         # open
                         _item_form += '<Col sm="12" md="6" lg="4" xl="3"> \n<Form.Group controlId="form' + \
                             _item['row'].capitalize()+'">\n'
@@ -124,12 +129,12 @@ def react_make_edit(name):
             # url update
             _temp_edit = _temp_edit.replace(
                 '//url', 'gen/' + i['name'].lower())
-             # url data
+            # url data
             _temp_edit = _temp_edit.replace(
                 '//dataurl', i['name'].lower())
-            # url options
-            _temp_edit = _temp_edit.replace(
-                '//optionsurl', 'gen/' + i['name'].lower() + "/edit")
+            # //valueofitem
+            _temp_edit = _temp_edit.replace("//valueofitem", _item_value)
+
             # edit handle function
             _temp_edit = _temp_edit.replace(
                 '//handleitem', _handle_item_function)

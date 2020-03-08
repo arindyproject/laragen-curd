@@ -77,11 +77,11 @@ def run():
                             "." + ref_i['ref'][1] + "')\n"
                 _select_text += ")"
                 _index_text += _select_text
-                _index_text += "\n\t\t->orderBy('id','DESC')->get();\n\t\t"
+                _index_text += "\n\t\t->orderBy('id','DESC')->paginate(25);\n\t\t"
             else:
                 # make variabel data from database
                 _index_text = "$" + i['name'] + \
-                    " = DB::table('" + i['name'] + "')->get(); \n\t\t"
+                    " = DB::table('" + i['name'] + "')->paginate(25); \n\t\t"
 
             # make return to json
             _index_text += "return response()->json([" + "'" + \
@@ -179,7 +179,8 @@ def run():
                             ref_i['ref'][0] + \
                             " = DB::table('" + \
                             ref_i['ref'][0] + \
-                            "')->pluck('" + ref_i['value'] + "','id'); \n\t\t"
+                            "')->select('id as value', '" + \
+                            ref_i['value'] + " as name')->get(); \n\t\t"
                         _edit_text_return += "'" + \
                             ref_i['ref'][0] + "' => $" + ref_i['ref'][0] + ","
 
