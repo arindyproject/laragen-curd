@@ -56,11 +56,11 @@ def react_make_table(name):
             _temp_table = _temp_table.replace(
                 "//dataname",  i['name'].lower())
 
+            
             # make delete
             if 'delete' in i['action']:
                 _bind_item += "this.handleDelete = this.handleDelete.bind(this);\n"
-                _method_action += "handleDelete(e,id) {"
-                _method_action += "\n\t\te.preventDefault();"
+                _method_action += "handleDelete(id) {"
                 _method_action += "\n\t\t\tif (window.confirm('Are you sure to delete this " + \
                     i['name'].lower()+"??')) {"
                 _method_action += "\n\t\t\t\taxios.delete('gen/" + \
@@ -119,10 +119,22 @@ def react_make_table(name):
                             _type_item_filter = ""
                     else:
                         pass
+                    
                     _item_columns += "\n\t\t\t\t\t\t\t\t\t<th>" + \
                         row['row'] + "</th>"
                     _item_rows += "\n\t\t\t\t\t\t\t\t\t<td>{item." + \
                         row['row'] + "}</td>"
+            #make action button
+            if 'view' in i['action'] or 'edit' in i['action'] or 'delete' in i['action']:
+                _item_columns += "\n\t\t\t\t\t\t\t\t\t<th>action</th>"
+                _item_rows += '\n\t\t\t\t\t\t\t\t\t\t<ButtonToolbar>\n\t\t\t\t\t\t\t\t\t\t\t<ToggleButtonGroup type="checkbox">'
+                if 'view' in i['action']:
+                    _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button variant="outline-success" size="sm">view</Button>'
+                if 'edit' in i['action']:
+                    _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button variant="outline-primary" size="sm">edit</Button>'
+                if 'delete' in i['action']:
+                    _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button onClick={()=>this.handleDelete(item.id)} variant="outline-danger" size="sm">delete</Button>'
+                _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t</ToggleButtonGroup>\n\t\t\t\t\t\t\t\t\t\t</ButtonToolbar>'
             # itemcolumns
             _temp_table = _temp_table.replace(
                 "//itemcolumns", _item_columns)

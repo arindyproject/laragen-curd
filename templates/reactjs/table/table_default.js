@@ -7,6 +7,9 @@ import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import Spinner from 'react-bootstrap/Spinner';
 import { Pagination } from 'react-laravel-paginex';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import Button from 'react-bootstrap/Button';
 //import
 
 export default class name_class extends Component {
