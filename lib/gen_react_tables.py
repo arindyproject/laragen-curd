@@ -79,15 +79,19 @@ def react_make_table(name):
                     i['name'].capitalize()+"';"
                 _state_item += "\n\t\t\tshowEdit : false,"
                 _bind_item += "\t\tthis.handleEdit = this.handleEdit.bind(this);\n"
-                _method_action += "\n\thandleEdit(e,id) {"
-                _method_action += "\n\t\te.preventDefault();"
+                _method_action += "\n\thandleEdit(id) {"
+                _method_action += "\n\t\tthis.setState({"
+                _method_action += "\n\t\t\ttemp_id : id,"
+                _method_action += "\n\t\t\tshowTable : false,"
+                _method_action += "\n\t\t\tshowEdit : true,"
+                _method_action += "\n\t\t})"
                 _method_action += "\n\t}\n"
 
-                _method_action += "\n\tshowEdit(id) {"
+                _method_action += "\n\tshowEdit() {"
                 _method_action += "\n\t\tif (this.state.showEdit && !this.state.isLoading) {"
                 _method_action += "\n\t\t\treturn ("
                 _method_action += "\n\t\t\t\t<Edit" + \
-                    i['name'].capitalize()+" id={id} />"
+                    i['name'].capitalize()+" id={this.state.temp_id} />"
                 _method_action += "\n\t\t\t);"
                 _method_action += "\n\t\t}"
                 _method_action += "\n\t}\n"
@@ -97,8 +101,7 @@ def react_make_table(name):
              # make view
             if 'view' in i['action']:
                 _bind_item += "\t\tthis.handleView = this.handleView.bind(this);\n"
-                _method_action += "\n\thandleView(e,id) {"
-                _method_action += "\n\t\te.preventDefault();"
+                _method_action += "\n\thandleView(id) {"
                 _method_action += "\n\t}\n"
 
             # read item rows
@@ -129,9 +132,9 @@ def react_make_table(name):
                 _item_columns += "\n\t\t\t\t\t\t\t\t\t<th>action</th>"
                 _item_rows += '\n\t\t\t\t\t\t\t\t\t\t<ButtonToolbar>\n\t\t\t\t\t\t\t\t\t\t\t<ToggleButtonGroup type="checkbox">'
                 if 'view' in i['action']:
-                    _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button variant="outline-success" size="sm">view</Button>'
+                    _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button onClick={()=>this.handleView(item.id)} variant="outline-success" size="sm">view</Button>'
                 if 'edit' in i['action']:
-                    _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button variant="outline-primary" size="sm">edit</Button>'
+                    _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button onClick={()=>this.handleEdit(item.id)} variant="outline-primary" size="sm">edit</Button>'
                 if 'delete' in i['action']:
                     _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button onClick={()=>this.handleDelete(item.id)} variant="outline-danger" size="sm">delete</Button>'
                 _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t</ToggleButtonGroup>\n\t\t\t\t\t\t\t\t\t\t</ButtonToolbar>'

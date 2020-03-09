@@ -22,6 +22,7 @@ export default class name_class extends Component {
             isLoading: true,
             showTable: true,
             data: [],
+            temp_id : 0,
             //stateitem
         };
         this.getData = this.getData.bind(this);
