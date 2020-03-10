@@ -56,7 +56,6 @@ def react_make_table(name):
             _temp_table = _temp_table.replace(
                 "//dataname",  i['name'].lower())
 
-            
             # make delete
             if 'delete' in i['action']:
                 _bind_item += "this.handleDelete = this.handleDelete.bind(this);\n"
@@ -122,22 +121,22 @@ def react_make_table(name):
                             _type_item_filter = ""
                     else:
                         pass
-                    
+
                     _item_columns += "\n\t\t\t\t\t\t\t\t\t<th>" + \
                         row['row'] + "</th>"
                     _item_rows += "\n\t\t\t\t\t\t\t\t\t<td>{item." + \
                         row['row'] + "}</td>"
-            #make action button
+            # make action button
             if 'view' in i['action'] or 'edit' in i['action'] or 'delete' in i['action']:
                 _item_columns += "\n\t\t\t\t\t\t\t\t\t<th>action</th>"
-                _item_rows += '\n\t\t\t\t\t\t\t\t\t\t<ButtonToolbar>\n\t\t\t\t\t\t\t\t\t\t\t<ToggleButtonGroup type="checkbox">'
+                _item_rows += '\n\t\t\t\t\t\t\t\t\t\t<td><ButtonToolbar>\n\t\t\t\t\t\t\t\t\t\t\t<ToggleButtonGroup type="checkbox">'
                 if 'view' in i['action']:
                     _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button onClick={()=>this.handleView(item.id)} variant="outline-success" size="sm">view</Button>'
                 if 'edit' in i['action']:
                     _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button onClick={()=>this.handleEdit(item.id)} variant="outline-primary" size="sm">edit</Button>'
                 if 'delete' in i['action']:
                     _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t\t<Button onClick={()=>this.handleDelete(item.id)} variant="outline-danger" size="sm">delete</Button>'
-                _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t</ToggleButtonGroup>\n\t\t\t\t\t\t\t\t\t\t</ButtonToolbar>'
+                _item_rows += '\n\t\t\t\t\t\t\t\t\t\t\t</ToggleButtonGroup>\n\t\t\t\t\t\t\t\t\t\t</ButtonToolbar></td>'
             # itemcolumns
             _temp_table = _temp_table.replace(
                 "//itemcolumns", _item_columns)

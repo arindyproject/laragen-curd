@@ -45,12 +45,7 @@ def react_make_create(name):
                         _bind_item_function += "\t\tthis.handle" + \
                             _item['row'].capitalize()+" = this.handle" + \
                             _item['row'].capitalize()+".bind(this);\n"
-                        # make function handle item form
-                        _handle_item_function += "\thandle" + \
-                            _item['row'].capitalize() + "(e){\n"
-                        _handle_item_function += "\t\tthis.setState({\n\t\t\t" + _item['row'].lower(
-                        ) + " : e.target.value \n\t\t})\n"
-                        _handle_item_function += "\t}\n"
+
                         # data item
                         _data_item += "\t\t\t" + \
                             _item['row'].lower() + " : this.state." + \
@@ -58,13 +53,19 @@ def react_make_create(name):
                         # open
                         _item_form += '<Col sm="12" md="6" lg="4" xl="3"> \n<Form.Group controlId="form' + \
                             _item['row'].capitalize()+'">\n'
-                        
+
                         # input / select
                         # check required
                         _required_item = ""
                         if _item['item'][1] == "NO":
                             _required_item = "required"
                         if _item['ref'] == "":  # not refrerence / no select
+                            # make function handle item form
+                            _handle_item_function += "\thandle" + \
+                                _item['row'].capitalize() + "(e){\n"
+                            _handle_item_function += "\t\tthis.setState({\n\t\t\t" + _item['row'].lower(
+                            ) + " : e.target.value \n\t\t})\n"
+                            _handle_item_function += "\t}\n"
                             # check type
                             _type_item = ""
                             if 'varchar' in _item['item'][0]:
@@ -78,14 +79,22 @@ def react_make_create(name):
 
                             # label
                             _item_form += '<Form.Label>' + \
-                            _item['row'].capitalize()+'</Form.Label>\n'
+                                _item['row'].capitalize()+'</Form.Label>\n'
 
                             _item_form += '<Form.Control onChange={this.handle'+_item['row'].capitalize()+'} value={this.state.'+_item['row'].lower()+'} type="'+_type_item+'" placeholder="' + \
                                 _item['row'].capitalize()+'" ' + \
                                 _required_item+' />\n'
                         else:
+                            # make function handle item form
+                            _handle_item_function += "\thandle" + \
+                                _item['row'].capitalize() + "(e){\n"
+                            _handle_item_function += "\t\tthis.setState({\n\t\t\t" + _item['row'].lower(
+                            ) + " : e.value \n\t\t})\n"
+                            _handle_item_function += "\t}\n"
                             # label
-                            _item_form += '<Form.Label> <a href="'+_item['ref'][0].lower()+'">+ '+_item['row'].capitalize()+'</a></Form.Label>\n'
+                            _item_form += '<Form.Label> <a href="' + \
+                                _item['ref'][0].lower(
+                                )+'">+ '+_item['row'].capitalize()+'</a></Form.Label>\n'
                             # _componentdidmount
                             _componentdidmount = "this.getOptions();"
                             # make state item
@@ -97,11 +106,8 @@ def react_make_create(name):
                                 _item['row'].lower() + "Options : response.data." + \
                                 _item['ref'][0].lower() + ",\n"
                             # make select form
-                            _item_form += '<Form.Control onChange={this.handle'+_item['row'].capitalize(
-                            )+'} value={this.state.'+_item['row'].lower()+'} as="select" '+_required_item+' >\n'
-                            _item_form += "{this.state."+_item['row'].lower(
-                            ) + "Options.map((data)=> <option key={data.value} value={data.value}>{data.name}</option>)}\n"
-                            _item_form += '</Form.Control>\n'
+                            _item_form += '<Select value={this.state.'+_item['row'].lower()+'} onChange={this.handle'+_item['row'].capitalize(
+                            )+'} options={this.state.'+_item['row'].lower()+'Options} />\n'
                         # close
                         _item_form += "</Form.Group> \n</Col>\n\n"
             # create form

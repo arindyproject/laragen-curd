@@ -128,7 +128,7 @@ def run():
                             " = DB::table('" + \
                             ref_i['ref'][0] + \
                             "')->select('id as value', '" + \
-                            ref_i['value'] + " as name')->get(); \n\t\t"
+                            ref_i['value'] + " as label')->get(); \n\t\t"
                         _create_text_return += "'" + \
                             ref_i['ref'][0] + "' => $" + ref_i['ref'][0] + ","
                         # end membuat create method
@@ -180,7 +180,7 @@ def run():
                             " = DB::table('" + \
                             ref_i['ref'][0] + \
                             "')->select('id as value', '" + \
-                            ref_i['value'] + " as name')->get(); \n\t\t"
+                            ref_i['value'] + " as label')->get(); \n\t\t"
                         _edit_text_return += "'" + \
                             ref_i['ref'][0] + "' => $" + ref_i['ref'][0] + ","
 
